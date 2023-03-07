@@ -16,6 +16,8 @@ const CommonManager = () => {
   useEffect(() => {
     if (token !== "") {
       SetupAxios.setHeaderToken(token);
+    } else {
+      SetupAxios.clearHeaderToken();
     }
   }, [token]);
   return <></>;

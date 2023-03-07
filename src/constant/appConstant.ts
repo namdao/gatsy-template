@@ -1,6 +1,10 @@
-export default {
-  API_URL: {
+const appConstant = {
+  ENV: {
     DEV: "http://localhost:5000",
     PROD: "https://api.inantoantam.com/",
   },
+  API_URL: {
+    SESSION: "users/session",
+  },
 };
+export default appConstant;

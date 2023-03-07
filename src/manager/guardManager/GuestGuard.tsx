@@ -1,6 +1,6 @@
 import { PATH_APP } from "constant/routeConstant";
 import { navigate } from "gatsby";
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { AuthSelector } from "scenes/auth/redux/slice";
 import { useAppSelector } from "store";
 import { isBrowser } from "utils/utility";
@@ -11,9 +11,10 @@ type GuestGuardProps = {
 };
 
 const GuestGuard: FC<GuestGuardProps> = ({ component: Component }) => {
+  console.log(Component);
   const token = useAppSelector(AuthSelector.getToken);
   if (token !== "" && isBrowser) {
-    navigate(PATH_APP.profile);
+    navigate(PATH_APP.root);
     return null;
   }
 

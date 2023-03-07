@@ -8,6 +8,10 @@ import { Stack, Alert, IconButton, InputAdornment } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import Iconify from "components/iconify";
 import FormProvider, { RHFTextField } from "components/hook-form";
+import { useAppSelector } from "store";
+import { AuthSelector } from "scenes/auth/redux/slice";
+import { IRequestLogin } from "scenes/auth/redux/types";
+import useAuth from "scenes/auth/hooks/useAuth";
 
 type FormValuesProps = {
   email: string;
@@ -16,9 +20,9 @@ type FormValuesProps = {
 };
 
 export default function AuthLoginForm() {
-  // const { login } = useAuthContext();
-
   const [showPassword, setShowPassword] = useState(false);
+  const { onSignIn } = useAuth();
+  const token = useAppSelector(AuthSelector.getToken);
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string()
@@ -28,8 +32,8 @@ export default function AuthLoginForm() {
   });
 
   const defaultValues = {
-    email: "demo@minimals.cc",
-    password: "demo1234",
+    email: "namdao@gmail.com",
+    password: "123456",
   };
 
   const methods = useForm<FormValuesProps>({
@@ -44,17 +48,21 @@ export default function AuthLoginForm() {
     formState: { errors, isSubmitting, isSubmitSuccessful },
   } = methods;
 
+  const callbackError = (message: string) => {
+    reset();
+    setError("afterSubmit", {
+      message: message,
+    });
+  };
+
   const onSubmit = async (data: FormValuesProps) => {
-    // try {
-    //   await login(data.email, data.password);
-    // } catch (error) {
-    //   console.log(error);
-    //   reset();
-    //   setError('afterSubmit', {
-    //     ...error,
-    //     message: error.message || error,
-    //   });
-    // }
+    const payload: IRequestLogin = {
+      identity: data.email,
+      password: data.password,
+      callbackError,
+    };
+    onSignIn(payload);
+    // dispatch(authActions.setTokenSuccess("fdsfsfsdfds"));
   };
 
   return (

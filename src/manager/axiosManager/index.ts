@@ -1,5 +1,6 @@
 import axios, { AxiosResponse, AxiosError } from "axios";
 import appConstant from "constant/appConstant";
+import { IResponseType } from "constant/commonType";
 
 const TIMEOUT = 1 * 60 * 1000;
 axios.defaults.timeout = TIMEOUT;
@@ -28,11 +29,11 @@ const setBaseUrl = (newUrl: string): string => {
   let newBaseUrl = "";
   const { IS_TEST_MODE } = process.env;
   if (!IS_TEST_MODE) {
-    newBaseUrl = appConstant.API_URL.PROD;
+    newBaseUrl = appConstant.ENV.PROD;
   } else if (newUrl) {
     newBaseUrl = newUrl;
   } else {
-    newBaseUrl = appConstant.API_URL.DEV;
+    newBaseUrl = appConstant.ENV.DEV;
   }
   axios.defaults.baseURL = newBaseUrl;
   return newBaseUrl;
@@ -58,7 +59,9 @@ const clearHeaderToken = (): void => {
   axios.defaults.headers.common = initHeader;
 };
 const setupOnResponseInterceptors = () => {
-  const onResponseSuccess = (response: AxiosResponse): any => {
+  const onResponseSuccess = (
+    response: AxiosResponse<IResponseType<any>>
+  ): any => {
     return response?.data;
   };
   const onResponseError = (errors: AxiosError): Promise<AxiosResponse<any>> => {

@@ -11,11 +11,7 @@ import {
 } from "./styles";
 import Images from "utils/images";
 import { useAppSelector } from "store";
-import {
-  settingsActions,
-  SettingsSelector,
-  ThemeModeValue,
-} from "services/settings/redux/slice";
+import { SettingsSelector } from "services/settings/redux/slice";
 
 type Props = {
   title?: string;
@@ -41,7 +37,7 @@ export default function LoginLayout({ children, title }: Props) {
           variant="h3"
           sx={{ mb: 10, maxWidth: 480, textAlign: "center" }}
         >
-          {title || "Hi, Welcome back"}
+          {title || "Hi, Welcome ToanTam Corp"}
         </Typography>
 
         <Image

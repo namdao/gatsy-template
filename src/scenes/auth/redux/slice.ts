@@ -1,31 +1,61 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { PersistConfig } from "redux-persist/lib/types";
 import { persistReducer } from "redux-persist";
 import { RootState } from "store";
 import storage from "redux-persist/lib/storage";
-import autoMergeLevel2 from "redux-persist/es/stateReconciler/autoMergeLevel2";
+import { IRequestLogin } from "./types";
 
-const initialState = {
-  count: 0,
-  token: "",
+export type IRoles = {
+  id: null | number;
+  name: string;
 };
-
+export type IProfile = {
+  id: number;
+  firstName: string;
+  lastName: string;
+  userName: string;
+  email: string;
+  createdTime: string;
+  roles: Array<IRoles>;
+};
+export type AuthState = {
+  token: string;
+  profile: IProfile;
+};
+const initialState: AuthState = {
+  token: "",
+  profile: {
+    id: 0,
+    firstName: "",
+    lastName: "",
+    userName: "",
+    email: "",
+    createdTime: "",
+    roles: [],
+  },
+};
 // Slice
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    increase: (state, action) => {
-      const { payload } = action;
-      state.count = state.count + payload;
+    setTokenSuccess: (state, action: PayloadAction<string>) => {
+      state.token = action.payload;
+    },
+    setProfileSuccess: (state, action: PayloadAction<IProfile>) => {
+      state.profile = action.payload;
+    },
+    resetData: (state) => {
+      state.token = initialState.token;
+      state.profile = initialState.profile;
     },
   },
 });
 
 // Selectors
-const getCount = (state: RootState) => state.data.auth.count;
 const getToken = (state: RootState) => state.data.auth.token;
-export const AuthSelector = { getCount, getToken };
+const getProfile = (state: RootState) => state.data.auth.profile;
+export const AuthSelector = { getToken, getProfile };
 
 // Actions
 export const authActions = authSlice.actions;
@@ -34,7 +64,5 @@ export const authActions = authSlice.actions;
 const persistConfig: PersistConfig<typeof initialState> = {
   key: "auth:slice",
   storage: storage,
-  stateReconciler: autoMergeLevel2,
 };
 export default persistReducer(persistConfig, authSlice.reducer);
-// export default authSlice.reducer;

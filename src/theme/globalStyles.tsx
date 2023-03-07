@@ -21,7 +21,7 @@ export default function GlobalStyles() {
           width: "100%",
           height: "100%",
         },
-        "#__next": {
+        "#___gatsby": {
           width: "100%",
           height: "100%",
         },

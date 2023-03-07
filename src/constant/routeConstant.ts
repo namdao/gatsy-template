@@ -9,4 +9,8 @@ export const PATH_AUTH = {
 export const PATH_APP = {
   root: ROOTS_APP,
   profile: `${ROOTS_APP}/profile`,
+  user: {
+    profile: `${ROOTS_APP}/user/profile`,
+    account: `${ROOTS_APP}/user/account`,
+  },
 };

@@ -10,7 +10,7 @@ export default function StyledNotistack() {
   const inputGlobalStyles = (
     <GlobalStyles
       styles={{
-        "#__next": {
+        "#___gatsby": {
           ".SnackbarContent-root": {
             width: "100%",
             padding: theme.spacing(1),
