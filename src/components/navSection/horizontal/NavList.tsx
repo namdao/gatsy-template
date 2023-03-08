@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-// import useActiveLink from "../../../hooks/useActiveLink";
+import useActiveLink from "hooks/useActiveLink";
 import { NavListProps } from "../types";
 import { StyledPopover } from "./styles";
 import NavItem from "./NavItem";
+import { useLocation } from "@reach/router";
 
 // ----------------------------------------------------------------------
 
@@ -15,9 +16,10 @@ type NavListRootProps = {
 export default function NavList({ data, depth, hasChild }: NavListRootProps) {
   const navRef = useRef(null);
 
-  // const { pathname } = useRouter();
+  const location = useLocation();
+  const { pathname } = location;
 
-  // const { active, isExternalLink } = useActiveLink(data.path);
+  const { active, isExternalLink } = useActiveLink(data.path);
 
   const [open, setOpen] = useState(false);
 
@@ -69,8 +71,8 @@ export default function NavList({ data, depth, hasChild }: NavListRootProps) {
         item={data}
         depth={depth}
         open={open}
-        active={true} //hande sau
-        isExternalLink={false} //hande sau
+        active={active}
+        isExternalLink={isExternalLink}
         onMouseEnter={handleOpen}
         onMouseLeave={handleClose}
       />

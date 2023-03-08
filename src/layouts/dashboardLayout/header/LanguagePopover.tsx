@@ -1,20 +1,16 @@
-import { useState } from "react";
+import React, { useState } from "react";
 // @mui
 import { MenuItem, Stack } from "@mui/material";
 // locales
-import { useLocales } from "../../../locales";
+import { useLocales } from "locales";
 // components
-import Image from "../../../components/image";
-import MenuPopover from "../../../components/menuPopover";
-import { IconButtonAnimate } from "../../../components/animate";
-
-// ----------------------------------------------------------------------
+import Image from "components/image";
+import MenuPopover from "components/menuPopover";
+import IconButtonAnimate from "components/animate/IconButtonAnimate";
 
 export default function LanguagePopover() {
-  const { allLangs, currentLang, onChangeLang } = useLocales();
-
+  const { allLangs, dataCurrentLang, onChangeLang } = useLocales();
   const [openPopover, setOpenPopover] = useState<HTMLElement | null>(null);
-
   const handleOpenPopover = (event: React.MouseEvent<HTMLElement>) => {
     setOpenPopover(event.currentTarget);
   };
@@ -23,7 +19,7 @@ export default function LanguagePopover() {
     setOpenPopover(null);
   };
 
-  const handleChangeLang = (newLang: string) => {
+  const handleChangeLang = (newLang: "vi" | "en") => {
     onChangeLang(newLang);
     handleClosePopover();
   };
@@ -40,7 +36,11 @@ export default function LanguagePopover() {
           }),
         }}
       >
-        <Image disabledEffect src={currentLang.icon} alt={currentLang.label} />
+        <Image
+          disabledEffect
+          src={dataCurrentLang.icon}
+          alt={dataCurrentLang.label}
+        />
       </IconButtonAnimate>
 
       <MenuPopover
@@ -52,8 +52,8 @@ export default function LanguagePopover() {
           {allLangs.map((option) => (
             <MenuItem
               key={option.value}
-              selected={option.value === currentLang.value}
-              onClick={() => handleChangeLang(option.value)}
+              selected={option.value === dataCurrentLang.value}
+              onClick={() => handleChangeLang(option.value as "vi" | "en")}
             >
               <Image
                 disabledEffect

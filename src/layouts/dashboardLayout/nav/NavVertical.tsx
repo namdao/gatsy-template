@@ -14,6 +14,7 @@ import navConfig from "./config-navigation";
 import NavDocs from "./NavDocs";
 import NavAccount from "./NavAccount";
 import NavToggleButton from "./NavToggleButton";
+import { useLocation } from "@reach/router";
 
 type Props = {
   openNav: boolean;
@@ -21,20 +22,16 @@ type Props = {
 };
 
 export default function NavVertical({ openNav, onCloseNav }: Props) {
-  // const { pathname } = useRouter();
+  const location = useLocation();
+  const { pathname } = location;
 
   const isDesktop = useResponsive("up", "lg");
 
-  useEffect(
-    () => {
-      if (openNav) {
-        onCloseNav();
-      }
-    },
-    [
-      // pathname
-    ]
-  );
+  useEffect(() => {
+    if (openNav) {
+      onCloseNav();
+    }
+  }, [pathname]);
 
   const renderContent = (
     <Scrollbar

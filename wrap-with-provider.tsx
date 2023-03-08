@@ -11,6 +11,7 @@ import CommonManager from "./src/manager/commonManager";
 import MotionLazyContainer from "./src/components/animate/MotionLazyContainer";
 import ThemeProvider from "./src/theme";
 import ThemeSettings from "./src/manager/settingsManager/ThemeSettings";
+import ThemeLocalization from "./src/locales/ThemeLocalization";
 import SnackbarProvider from "./src/components/snackbar";
 
 const clientSideEmotionCache = createEmotionCache();
@@ -41,7 +42,9 @@ export const wrapPageProvider = ({ element }) => {
       <MotionLazyContainer>
         <ThemeProvider>
           <ThemeSettings>
-            <SnackbarProvider>{element}</SnackbarProvider>
+            <ThemeLocalization>
+              <SnackbarProvider>{element}</SnackbarProvider>
+            </ThemeLocalization>
           </ThemeSettings>
         </ThemeProvider>
       </MotionLazyContainer>

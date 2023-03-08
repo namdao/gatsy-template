@@ -6,7 +6,7 @@ import { Theme } from "@mui/material/styles";
 // import Tabs from "./Tabs";
 // import Menu from "./Menu";
 // import Link from "./Link";
-// import Lists from "./List";
+import Lists from "./List";
 // import Table from "./Table";
 // import Alert from "./Alert";
 // import Badge from "./Badge";
@@ -32,8 +32,8 @@ import { Theme } from "@mui/material/styles";
 // import Timeline from "./Timeline";
 // import TreeView from "./TreeView";
 // import Checkbox from "./Checkbox";
-// import Accordion from "./Accordion";
-// import Typography from "./Typography";
+import Accordion from "./Accordion";
+import Typography from "./Typography";
 // import Pagination from "./Pagination";
 // import Breadcrumbs from "./Breadcrumbs";
 // import ButtonGroup from "./ButtonGroup";
@@ -44,7 +44,6 @@ import { Theme } from "@mui/material/styles";
 
 export default function ComponentsOverrides(theme: Theme) {
   return Object.assign(
-    {}
     // Fab(theme),
     // Tabs(theme),
     // Chip(theme),
@@ -54,7 +53,7 @@ export default function ComponentsOverrides(theme: Theme) {
     // Input(theme),
     // Radio(theme),
     // Badge(theme),
-    // Lists(theme),
+    Lists(theme),
     // Table(theme),
     // Paper(theme),
     // Alert(theme),
@@ -77,8 +76,8 @@ export default function ComponentsOverrides(theme: Theme) {
     // TreeView(theme),
     // Backdrop(theme),
     // Progress(theme),
-    // Accordion(theme),
-    // Typography(theme),
+    Accordion(theme),
+    Typography(theme)
     // Pagination(theme),
     // ButtonGroup(theme),
     // Breadcrumbs(theme),

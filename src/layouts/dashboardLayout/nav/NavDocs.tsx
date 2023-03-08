@@ -1,20 +1,18 @@
 import React from "react";
 // @mui
 import { Stack, Button, Typography, Box } from "@mui/material";
-// locales
-// import { useLocales } from "../../../locales";
-// routes
 import { useAppSelector } from "store";
-import { AccountSelector } from "scenes/account/redux/slice";
 import Svg from "utils/svg";
 import { PATH_APP } from "constant/routeConstant";
+import { AuthSelector } from "scenes/auth/redux/slice";
+import { useLocales } from "locales";
 
 // ----------------------------------------------------------------------
 
 export default function NavDocs() {
-  const user = useAppSelector(AccountSelector.getProfile);
+  const user = useAppSelector(AuthSelector.getProfile);
 
-  // const { translate } = useLocales();
+  const { translate } = useLocales();
 
   return (
     <Stack
@@ -32,14 +30,14 @@ export default function NavDocs() {
 
       <div>
         <Typography gutterBottom variant="subtitle1">
-          {`Hi, ${user?.userName}`}
+          {`${translate("docs.hi")}, ${user?.userName}`}
         </Typography>
 
         <Typography
           variant="body2"
           sx={{ color: "text.secondary", whiteSpace: "pre-line" }}
         >
-          {`$docs.description`}
+          {`${translate("docs.description")}`}
         </Typography>
       </div>
 
@@ -49,7 +47,7 @@ export default function NavDocs() {
         rel="noopener"
         variant="contained"
       >
-        {`docs.documentation`}
+        {`${translate("docs.documentation")}`}
       </Button>
     </Stack>
   );

@@ -6,5 +6,6 @@ const appConstant = {
   API_URL: {
     SESSION: "users/session",
   },
+  LANGS_DEFAULT: "en",
 };
 export default appConstant;

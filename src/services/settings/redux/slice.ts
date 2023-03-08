@@ -28,6 +28,7 @@ export type SettingsValueProps = {
 type ISettings = {
   url: string;
   themes: SettingsValueProps;
+  langs: "vi" | "en";
 };
 export const defaultSettings: SettingsValueProps = {
   themeMode: "light",
@@ -40,6 +41,7 @@ export const defaultSettings: SettingsValueProps = {
 const initialState: ISettings = {
   url: "",
   themes: defaultSettings,
+  langs: "vi",
 };
 
 // Slice
@@ -74,6 +76,9 @@ const settingsSlice = createSlice({
     onResetSettings: (state) => {
       state.themes = defaultSettings;
     },
+    onChangeLangs: (state, action: PayloadAction<"en" | "vi">) => {
+      state.langs = action.payload;
+    },
   },
 });
 
@@ -91,6 +96,7 @@ const getThemeDirection = (state: RootState) =>
   state.services.settings.themes.themeDirection;
 const getThemeColorPresets = (state: RootState) =>
   state.services.settings.themes.themeColorPresets;
+const getLangsDefault = (state: RootState) => state.services.settings.langs;
 export const SettingsSelector = {
   getUrl,
   getThemeMode,
@@ -99,6 +105,7 @@ export const SettingsSelector = {
   getThemeDirection,
   getThemeLayout,
   getThemeStretch,
+  getLangsDefault,
 };
 
 // Actions

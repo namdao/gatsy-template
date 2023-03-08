@@ -2,7 +2,7 @@ import React from "react";
 // @mui
 import { Box, Tooltip, Link, ListItemText } from "@mui/material";
 // locales
-// import { useLocales } from '../../../locales';
+import { useLocales } from "locales";
 // auth
 // import RoleBasedGuard from '../../../auth/RoleBasedGuard';
 //
@@ -21,7 +21,7 @@ export default function NavItem({
   isExternalLink,
   ...other
 }: NavItemProps) {
-  // const { translate } = useLocales();
+  const { translate } = useLocales();
 
   const { title, path, icon, info, children, disabled, caption, roles } = item;
 
@@ -44,16 +44,11 @@ export default function NavItem({
       )}
 
       <ListItemText
-        // primary={`${translate(title)}`}
-        primary="title"
+        primary={translate(`${title}`)}
         secondary={
           caption && (
-            <Tooltip
-              // title={`${translate(caption)}`}
-              title={"caption"}
-              placement="top-start"
-            >
-              <span>{`caption`}</span>
+            <Tooltip title={`${translate(caption)}`} placement="top-start">
+              <span>{`${translate(caption)}`}</span>
             </Tooltip>
           )
         }

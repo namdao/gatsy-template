@@ -5,12 +5,13 @@ import { Box, Tooltip, ListItemText, Link } from "@mui/material";
 import Iconify from "components/iconify";
 import { NavItemProps } from "../types";
 import { StyledItem, StyledIcon } from "./styles";
+import { useLocales } from "locales";
 
 // ----------------------------------------------------------------------
 
 const NavItem = forwardRef<HTMLDivElement, NavItemProps>(
   ({ item, depth, open, active, isExternalLink, ...other }, ref) => {
-    // const { translate } = useLocales();
+    const { translate } = useLocales();
 
     const { title, path, icon, info, children, disabled, caption, roles } =
       item;
@@ -29,7 +30,7 @@ const NavItem = forwardRef<HTMLDivElement, NavItemProps>(
         {icon && <StyledIcon>{icon}</StyledIcon>}
 
         <ListItemText
-          primary={`title`}
+          primary={translate(title)}
           primaryTypographyProps={{
             noWrap: true,
             component: "span",
@@ -44,7 +45,7 @@ const NavItem = forwardRef<HTMLDivElement, NavItemProps>(
         )}
 
         {caption && (
-          <Tooltip title={`caption`} arrow>
+          <Tooltip title={translate(caption)} arrow>
             <Box component="span" sx={{ ml: 0.5, lineHeight: 0 }}>
               <Iconify icon="eva:info-outline" width={16} />
             </Box>

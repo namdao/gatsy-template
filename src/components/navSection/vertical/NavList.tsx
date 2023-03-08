@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 // @mui
 import { Collapse } from "@mui/material";
 // hooks
-// import useActiveLink from '../../../hooks/useActiveLink';
-//
+import useActiveLink from "hooks/useActiveLink";
 import { NavListProps } from "../types";
 import NavItem from "./NavItem";
+import { useLocation } from "@reach/router";
 
 // ----------------------------------------------------------------------
 
@@ -16,23 +16,17 @@ type NavListRootProps = {
 };
 
 export default function NavList({ data, depth, hasChild }: NavListRootProps) {
-  // const { pathname } = useRouter();
+  const location = useLocation();
+  const { pathname } = location;
 
-  // const { active, isExternalLink } = useActiveLink(data.path);
-  const active = false;
+  const { active, isExternalLink } = useActiveLink(data.path);
   const [open, setOpen] = useState(active);
 
-  useEffect(
-    () => {
-      if (!active) {
-        handleClose();
-      }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    },
-    [
-      // pathname
-    ]
-  );
+  useEffect(() => {
+    if (!active) {
+      handleClose();
+    }
+  }, [pathname]);
 
   const handleToggle = () => {
     setOpen(!open);
@@ -49,7 +43,7 @@ export default function NavList({ data, depth, hasChild }: NavListRootProps) {
         depth={depth}
         open={open}
         active={active}
-        isExternalLink={false}
+        isExternalLink={isExternalLink}
         onClick={handleToggle}
       />
 

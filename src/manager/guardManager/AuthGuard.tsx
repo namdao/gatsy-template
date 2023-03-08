@@ -9,13 +9,13 @@ type AuthGuardProps = {
   component: React.ReactNode | any;
   path?: string;
 };
-const AuthGuard = ({ component: Component }: AuthGuardProps) => {
+const AuthGuard = ({ component: Component, ...rest }: AuthGuardProps) => {
   const token = useAppSelector(AuthSelector.getToken);
   if (token === "" || !isBrowser) {
     navigate(PATH_AUTH.login);
     return null;
   }
-  return <Component />;
+  return <Component {...rest} />;
 };
 
 export default AuthGuard;

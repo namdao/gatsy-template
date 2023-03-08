@@ -35,6 +35,9 @@ import icMenuItem from "assets/icons/navbar/ic_menu_item.svg";
 import icEcommerce from "assets/icons/navbar/ic_ecommerce.svg";
 import icAnalytics from "assets/icons/navbar/ic_analytics.svg";
 import icDashboard from "assets/icons/navbar/ic_dashboard.svg";
+//flag
+import icFlagVn from "assets/icons/flags/ic_flag_vn.svg";
+import icFlagEn from "assets/icons/flags/ic_flag_en.svg";
 const Svg = {
   Setting: {
     icAlignLeft,
@@ -79,6 +82,10 @@ const Svg = {
     icEcommerce,
     icAnalytics,
     icDashboard,
+  },
+  flag: {
+    icFlagVn,
+    icFlagEn,
   },
 };
 export default Svg;

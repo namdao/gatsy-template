@@ -10,14 +10,13 @@ type GuestGuardProps = {
   path: string;
 };
 
-const GuestGuard: FC<GuestGuardProps> = ({ component: Component }) => {
-  console.log(Component);
+const GuestGuard: FC<GuestGuardProps> = ({ component: Component, ...rest }) => {
   const token = useAppSelector(AuthSelector.getToken);
   if (token !== "" && isBrowser) {
     navigate(PATH_APP.root);
     return null;
   }
 
-  return <Component />;
+  return <Component {...rest} />;
 };
 export default GuestGuard;

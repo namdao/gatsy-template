@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 // hooks
-// import useActiveLink from '../../../hooks/useActiveLink';
+import useActiveLink from "hooks/useActiveLink";
 import { NavListProps } from "../types";
 import { StyledPopover } from "./styles";
 import NavItem from "./NavItem";
+import { useLocation } from "@reach/router";
 
 // ----------------------------------------------------------------------
 
@@ -15,24 +16,18 @@ type NavListRootProps = {
 
 export default function NavList({ data, depth, hasChild }: NavListRootProps) {
   const navRef = useRef(null);
+  const location = useLocation();
+  const { pathname } = location;
 
-  // const { pathname } = useRouter();
-
-  // const { active, isExternalLink } = useActiveLink(data.path);
+  const { active, isExternalLink } = useActiveLink(data.path);
 
   const [open, setOpen] = useState(false);
 
-  useEffect(
-    () => {
-      if (open) {
-        handleClose();
-      }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    },
-    [
-      // pathname
-    ]
-  );
+  useEffect(() => {
+    if (open) {
+      handleClose();
+    }
+  }, [pathname]);
 
   useEffect(() => {
     const appBarEl = Array.from(
@@ -71,8 +66,8 @@ export default function NavList({ data, depth, hasChild }: NavListRootProps) {
         item={data}
         depth={depth}
         open={open}
-        active={true}
-        isExternalLink={false}
+        active={active}
+        isExternalLink={isExternalLink}
         onMouseEnter={handleOpen}
         onMouseLeave={handleClose}
       />
