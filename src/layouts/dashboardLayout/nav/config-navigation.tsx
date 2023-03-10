@@ -45,28 +45,28 @@ const navConfig = [
   {
     subheader: "general",
     items: [
-      { title: "app", path: PATH_APP.root, icon: ICONS.dashboard },
+      { title: "app", path: PATH_APP.dashboard, icon: ICONS.dashboard },
       {
         title: "ecommerce",
-        path: PATH_APP.root,
+        path: PATH_APP.ecommerce.root,
         icon: ICONS.ecommerce,
       },
       {
         title: "analytics",
-        path: PATH_APP.root,
+        path: PATH_APP.analytics,
         icon: ICONS.analytics,
       },
       {
         title: "banking",
-        path: PATH_APP.root,
+        path: PATH_APP.banking,
         icon: ICONS.banking,
       },
       {
         title: "booking",
-        path: PATH_APP.root,
+        path: PATH_APP.booking,
         icon: ICONS.booking,
       },
-      { title: "file", path: PATH_APP.root, icon: ICONS.file },
+      { title: "file", path: PATH_APP.file, icon: ICONS.file },
     ],
   },
 
@@ -78,60 +78,60 @@ const navConfig = [
       // USER
       {
         title: "user",
-        path: PATH_APP.profile,
+        path: PATH_APP.user.root,
         icon: ICONS.user,
         children: [
-          { title: "profile", path: PATH_APP.profile },
-          { title: "cards", path: PATH_APP.profile },
-          { title: "list", path: PATH_APP.profile },
-          { title: "create", path: PATH_APP.profile },
-          { title: "edit", path: PATH_APP.profile },
-          { title: "account", path: PATH_APP.profile },
+          { title: "profile", path: PATH_APP.user.profile },
+          { title: "cards", path: PATH_APP.user.cards },
+          { title: "list", path: PATH_APP.user.list },
+          { title: "create", path: PATH_APP.user.create },
+          { title: "edit", path: PATH_APP.user.edit },
+          { title: "account", path: PATH_APP.user.account },
         ],
       },
 
       // E-COMMERCE
       {
         title: "ecommerce",
-        path: PATH_APP.profile,
+        path: PATH_APP.ecommerce.root,
         icon: ICONS.cart,
         children: [
-          { title: "shop", path: PATH_APP.profile },
-          { title: "product", path: PATH_APP.profile },
-          { title: "list", path: PATH_APP.profile },
-          { title: "create", path: PATH_APP.profile },
-          { title: "edit", path: PATH_APP.profile },
-          { title: "checkout", path: PATH_APP.profile },
+          { title: "shop", path: PATH_APP.ecommerce.shop },
+          { title: "product", path: PATH_APP.ecommerce.product },
+          { title: "list", path: PATH_APP.ecommerce.list },
+          { title: "create", path: PATH_APP.ecommerce.create },
+          { title: "edit", path: PATH_APP.ecommerce.edit },
+          { title: "checkout", path: PATH_APP.ecommerce.checkout },
         ],
       },
 
       // INVOICE
       {
         title: "invoice",
-        path: PATH_APP.root,
+        path: PATH_APP.invoice.root,
         icon: ICONS.invoice,
         children: [
-          { title: "list", path: PATH_APP.root },
-          { title: "details", path: PATH_APP.root },
-          { title: "create", path: PATH_APP.root },
-          { title: "edit", path: PATH_APP.root },
+          { title: "list", path: PATH_APP.invoice.list },
+          { title: "details", path: PATH_APP.invoice.details },
+          { title: "create", path: PATH_APP.invoice.create },
+          { title: "edit", path: PATH_APP.invoice.edit },
         ],
       },
 
       // BLOG
       {
         title: "blog",
-        path: PATH_APP.root,
+        path: PATH_APP.blog.root,
         icon: ICONS.blog,
         children: [
-          { title: "posts", path: PATH_APP.root },
-          { title: "post", path: PATH_APP.root },
-          { title: "create", path: PATH_APP.root },
+          { title: "posts", path: PATH_APP.blog.posts },
+          { title: "post", path: PATH_APP.blog.post },
+          { title: "create", path: PATH_APP.blog.create },
         ],
       },
       {
         title: "File manager",
-        path: PATH_APP.root,
+        path: PATH_APP.fileManager,
         icon: ICONS.folder,
       },
     ],
@@ -144,23 +144,23 @@ const navConfig = [
     items: [
       {
         title: "mail",
-        path: PATH_APP.root,
+        path: `${PATH_APP.root}/mail`,
         icon: ICONS.mail,
         info: <Label color="error">+32</Label>,
       },
       {
         title: "chat",
-        path: PATH_APP.root,
+        path: `${PATH_APP.root}/chat`,
         icon: ICONS.chat,
       },
       {
         title: "calendar",
-        path: PATH_APP.root,
+        path: `${PATH_APP.root}/calendar`,
         icon: ICONS.calendar,
       },
       {
         title: "kanban",
-        path: PATH_APP.root,
+        path: `${PATH_APP.root}/kanban`,
         icon: ICONS.kanban,
       },
     ],
@@ -177,7 +177,7 @@ const navConfig = [
         // roles: ['admin', 'manager'] Only admin/manager can see this item.
         // Reference from 'src/guards/RoleBasedGuard'.
         title: "item_by_roles",
-        path: PATH_APP.root,
+        path: PATH_APP.orther.permissionDenied,
         icon: ICONS.lock,
         roles: ["admin"],
         caption: "only_admin_can_see_this_item",
@@ -248,7 +248,7 @@ const navConfig = [
       },
       {
         title: "blank",
-        path: PATH_APP.root,
+        path: PATH_APP.orther.blank,
         icon: ICONS.blank,
       },
     ],

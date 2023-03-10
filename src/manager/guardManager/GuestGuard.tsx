@@ -6,7 +6,7 @@ import { useAppSelector } from "store";
 import { isBrowser } from "utils/utility";
 
 type GuestGuardProps = {
-  component: React.ReactNode | any;
+  component: React.ElementType;
   path: string;
 };
 

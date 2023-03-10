@@ -1,6 +1,8 @@
 import React from "react";
 // @mui
-import { Box, Tooltip, Link, ListItemText } from "@mui/material";
+import { Box, Tooltip, Link as LinkMui, ListItemText } from "@mui/material";
+import { Link } from "gatsby";
+
 // locales
 import { useLocales } from "locales";
 // auth
@@ -44,7 +46,7 @@ export default function NavItem({
       )}
 
       <ListItemText
-        primary={translate(`${title}`)}
+        primary={translate(title)}
         secondary={
           caption && (
             <Tooltip title={`${translate(caption)}`} placement="top-start">
@@ -85,9 +87,9 @@ export default function NavItem({
     // ExternalLink
     if (isExternalLink)
       return (
-        <Link href={path} target="_blank" rel="noopener" underline="none">
+        <LinkMui href={path} target="_blank" rel="noopener" underline="none">
           {renderContent}
-        </Link>
+        </LinkMui>
       );
 
     // Has child
@@ -97,7 +99,7 @@ export default function NavItem({
 
     // Default
     return (
-      <Link component="a" href={path} underline="none">
+      <Link to={path} style={{ textDecoration: "none" }}>
         {renderContent}
       </Link>
     );

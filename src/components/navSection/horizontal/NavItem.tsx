@@ -1,6 +1,8 @@
 import React, { forwardRef } from "react";
 // @mui
-import { Box, Tooltip, ListItemText, Link } from "@mui/material";
+import { Box, Tooltip, Link as LinkMui, ListItemText } from "@mui/material";
+import { Link } from "@reach/router";
+
 //
 import Iconify from "components/iconify";
 import { NavItemProps } from "../types";
@@ -66,14 +68,14 @@ const NavItem = forwardRef<HTMLDivElement, NavItemProps>(
       // ExternalLink
       if (isExternalLink)
         return (
-          <Link href={path} target="_blank" rel="noopener" underline="none">
+          <LinkMui href={path} target="_blank" rel="noopener" underline="none">
             {renderContent}
-          </Link>
+          </LinkMui>
         );
 
       // Default
       return (
-        <Link component="a" href={path} underline="none">
+        <Link to={path} style={{ textDecoration: "none" }}>
           {renderContent}
         </Link>
       );

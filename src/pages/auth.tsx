@@ -8,6 +8,7 @@ import NotFoundPage from "./404";
 const Auth = () => (
   <Router>
     <GuestGuard path={PATH_AUTH.login} component={Login} />
+    {/* @ts-ignore */}
     <NotFoundPage default={true} />
   </Router>
 );

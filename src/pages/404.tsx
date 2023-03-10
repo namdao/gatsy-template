@@ -1,49 +1,56 @@
 import React from "react";
-import { Link, HeadFC, PageProps } from "gatsby";
+import { m } from "framer-motion";
+// @mui
+import { Button, Typography } from "@mui/material";
+// components
+import MotionContainer from "components/animate/MotionLazyContainer";
+// assets
+import PageNotFoundIllustration from "assets/illustrations/PageNotFoundIllustration";
+import { Link } from "gatsby";
 
-const pageStyles = {
-  color: "#232129",
-  padding: "96px",
-  fontFamily: "-apple-system, Roboto, sans-serif, serif",
+const animatedIn = {
+  animate: {
+    scale: [0.3, 1.1, 0.9, 1.03, 0.97, 1],
+    opacity: [0, 1, 1, 1, 1, 1],
+    transition: { durationIn: 0.5, easeIn: [0.43, 0.13, 0.23, 0.96] },
+  },
+  exit: {
+    scale: [0.9, 1.1, 0.3],
+    opacity: [1, 1, 0],
+  },
 };
-const headingStyles = {
-  marginTop: 0,
-  marginBottom: 64,
-  maxWidth: 320,
-};
-
-const paragraphStyles = {
-  marginBottom: 48,
-};
-const codeStyles = {
-  color: "#8A6534",
-  padding: 4,
-  backgroundColor: "#FFF4DB",
-  fontSize: "1.25rem",
-  borderRadius: 4,
-};
-
-const NotFoundPage: React.FC<PageProps> = () => {
+export default function Page404() {
   return (
-    <main style={pageStyles}>
-      <h1 style={headingStyles}>Page not found</h1>
-      <p style={paragraphStyles}>
-        Sorry 😔, we couldn’t find what you were looking for.
-        <br />
-        {process.env.NODE_ENV === "development" ? (
-          <>
-            <br />
-            Try creating a page in <code style={codeStyles}>src/pages/</code>.
-            <br />
-          </>
-        ) : null}
-        <br />
-        <Link to="/">Go home</Link>.
-      </p>
-    </main>
+    <>
+      <header>
+        <title> 404 Page Not Found</title>
+      </header>
+
+      <MotionContainer>
+        <m.div variants={animatedIn}>
+          <Typography variant="h3" paragraph>
+            Sorry, page not found!
+          </Typography>
+        </m.div>
+
+        <m.div variants={animatedIn}>
+          <Typography sx={{ color: "text.secondary" }}>
+            Sorry, we couldn’t find the page you’re looking for. Perhaps you’ve
+            mistyped the URL? Be sure to check your spelling.
+          </Typography>
+        </m.div>
+
+        <m.div variants={animatedIn}>
+          <PageNotFoundIllustration
+            sx={{
+              height: 260,
+              my: { xs: 5, sm: 10 },
+            }}
+          />
+        </m.div>
+
+        <Link to="/">Go to Home</Link>
+      </MotionContainer>
+    </>
   );
-};
-
-export default NotFoundPage;
-
-export const Head: HeadFC = () => <title>Not found</title>;
+}

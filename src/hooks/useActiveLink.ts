@@ -9,19 +9,15 @@ type ReturnType = {
 
 export default function useActiveLink(path: string, deep = true): ReturnType {
   const location = useLocation();
-  const { pathname, href: asPath } = location;
+
+  const { pathname } = location;
 
   const checkPath = path.startsWith("#");
+  const currentPath = path === "/" ? "/" : `${path}`;
+  console.log(checkPath, currentPath, pathname);
+  const normalActive = !checkPath && pathname === currentPath;
 
-  const currentPath = path === "/" ? "/" : `${path}/`;
-
-  const normalActive =
-    (!checkPath && pathname === currentPath) ||
-    (!checkPath && asPath === currentPath);
-
-  const deepActive =
-    (!checkPath && pathname.includes(currentPath)) ||
-    (!checkPath && asPath.includes(currentPath));
+  const deepActive = !checkPath && pathname.includes(currentPath);
 
   return {
     active: deep ? deepActive : normalActive,

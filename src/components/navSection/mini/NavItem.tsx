@@ -1,8 +1,10 @@
 import React, { forwardRef } from "react";
 // @mui
-import { Tooltip, Link, ListItemText } from "@mui/material";
+import { Tooltip, Link as LinkMui, ListItemText } from "@mui/material";
+import { Link } from "@reach/router";
+
 // locales
-// import { useLocales } from '../../../locales';
+import { useLocales } from "locales";
 // auth
 // import RoleBasedGuard from '../../../auth/RoleBasedGuard';
 //
@@ -14,7 +16,7 @@ import { StyledItem, StyledIcon } from "./styles";
 
 const NavItem = forwardRef<HTMLDivElement, NavItemProps>(
   ({ item, depth, open, active, isExternalLink, ...other }, ref) => {
-    // const { translate } = useLocales();
+    const { translate } = useLocales();
 
     const { title, path, icon, children, disabled, caption, roles } = item;
 
@@ -32,8 +34,7 @@ const NavItem = forwardRef<HTMLDivElement, NavItemProps>(
         {icon && <StyledIcon>{icon}</StyledIcon>}
 
         <ListItemText
-          // primary={`${translate(title)}`}
-          primary="title"
+          primary={`${translate(title)}`}
           primaryTypographyProps={{
             noWrap: true,
             sx: {
@@ -90,14 +91,14 @@ const NavItem = forwardRef<HTMLDivElement, NavItemProps>(
       // ExternalLink
       if (isExternalLink)
         return (
-          <Link href={path} target="_blank" rel="noopener" underline="none">
+          <LinkMui href={path} target="_blank" rel="noopener" underline="none">
             {renderContent}
-          </Link>
+          </LinkMui>
         );
 
       // Default
       return (
-        <Link component="a" href={path} underline="none">
+        <Link to={path} style={{ textDecoration: "none" }}>
           {renderContent}
         </Link>
       );
