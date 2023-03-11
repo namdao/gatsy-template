@@ -1,14 +1,21 @@
 import React, { useEffect } from "react";
-import { Router } from "@reach/router";
+import { Router, useLocation } from "@reach/router";
 import AuthGuard from "manager/guardManager/AuthGuard";
-import NotFoundPage from "./404";
 import navConfig from "layouts/dashboardLayout/nav/config-navigation";
 import DashboardLayout from "layouts/dashboardLayout";
 import { PATH_APP } from "constant/routeConstant";
 import { navigate } from "gatsby";
 
 const NotFoundTemp = () => {
+  const location = useLocation();
+  const { pathname } = location;
+
   useEffect(() => {
+    console.log(pathname);
+    if (pathname === PATH_APP.root) {
+      navigate(PATH_APP.dashboard);
+      return;
+    }
     navigate("/404");
   }, []);
   return <></>;

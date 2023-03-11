@@ -7,6 +7,7 @@ import MotionContainer from "components/animate/MotionLazyContainer";
 // assets
 import PageNotFoundIllustration from "assets/illustrations/PageNotFoundIllustration";
 import { Link } from "gatsby";
+import CompactLayout from "layouts/compactLayout";
 
 const animatedIn = {
   animate: {
@@ -21,7 +22,7 @@ const animatedIn = {
 };
 export default function Page404() {
   return (
-    <>
+    <CompactLayout>
       <header>
         <title> 404 Page Not Found</title>
       </header>
@@ -49,8 +50,10 @@ export default function Page404() {
           />
         </m.div>
 
-        <Link to="/">Go to Home</Link>
+        <Button href="/" size="large" variant="contained">
+          Go to Home
+        </Button>
       </MotionContainer>
-    </>
+    </CompactLayout>
   );
 }
